@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       git curl ca-certificates xz-utils p7zip-full \
       python3 python3-pip python3-venv \
       build-essential cmake ninja-build \
+      nodejs \
       libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 

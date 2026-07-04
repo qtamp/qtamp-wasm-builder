@@ -48,4 +48,12 @@ for f in qtamp.html qtamp.js qtamp.wasm qtampd.js qtamp.worker.js qtloader.js; d
 done
 # Qt 6 also emits a *.html we can rename to index.html for hosting.
 [ -f "${DIST}/qtamp.html" ] && cp "${DIST}/qtamp.html" "${DIST}/index.html"
+echo "==> smoke: js/wasm link test"
+if command -v node >/dev/null 2>&1 && [ -f "${SRC}/wasm/test/link-test.mjs" ]; then
+    node "${SRC}/wasm/test/link-test.mjs" "${DIST}" || {
+        echo "link-test FAILED: the js glue and wasm binary do not match" >&2
+        exit 1
+    }
+fi
+
 echo "==> dist:"; ls -la "${DIST}"
