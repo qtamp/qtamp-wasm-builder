@@ -35,6 +35,11 @@ echo "==> configuring (qt-cmake, wasm toolchain, QTAMP_WASM=ON)"
 echo "==> building"
 cmake --build "${BUILD_DIR}" -j"$(nproc)"
 
+echo "==> shrinking with wasm-opt (keeps the player under the 25 MiB Pages per-file limit)"
+/opt/emsdk/upstream/bin/wasm-opt -Oz --all-features \
+    "${BUILD_DIR}/qtamp.wasm" -o "${BUILD_DIR}/qtamp.wasm.opt" \
+    && mv "${BUILD_DIR}/qtamp.wasm.opt" "${BUILD_DIR}/qtamp.wasm"
+
 echo "==> collecting dist"
 rm -rf "${DIST}"; mkdir -p "${DIST}"
 # Qt names the output after the target; copy the standard wasm quintet.
