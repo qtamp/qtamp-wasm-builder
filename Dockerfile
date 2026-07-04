@@ -26,9 +26,9 @@ RUN git clone --depth 1 https://github.com/emscripten-core/emsdk.git /opt/emsdk 
 
 # Qt for WebAssembly plus the matching host Qt (needed for moc/rcc/qmltyperegistrar
 # and the qmlimportscanner). --autodesktop pulls the host build automatically.
-RUN pip3 install --no-cache-dir "aqtinstall==3.1.*"
-RUN aqt install-qt linux desktop ${QT_VERSION} wasm_singlethread \
-      -O /opt/qt -m qtmultimedia qtdeclarative qtshadertools --autodesktop
+RUN pip3 install --no-cache-dir aqtinstall
+RUN aqt install-qt all_os wasm ${QT_VERSION} wasm_singlethread \
+      -O /opt/qt -m qtmultimedia qtshadertools --autodesktop
 
 ENV QT_VERSION=${QT_VERSION}
 ENV QT_WASM=/opt/qt/${QT_VERSION}/wasm_singlethread
