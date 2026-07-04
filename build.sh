@@ -27,7 +27,7 @@ fi
 mkdir -p "${BUILD_DIR}"
 echo "==> configuring (qt-cmake, wasm toolchain, QTAMP_WASM=ON)"
 "${QT_WASM}/bin/qt-cmake" -S "${SRC}" -B "${BUILD_DIR}" -G Ninja \
-    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_BUILD_TYPE=MinSizeRel \
     -DQT_HOST_PATH="${QT_HOST}" \
     -DQTAMP_USE_QTWASABI=ON \
     -DQTAMP_WASM=ON
