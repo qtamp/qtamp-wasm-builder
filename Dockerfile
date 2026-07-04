@@ -30,6 +30,10 @@ RUN pip3 install --no-cache-dir aqtinstall
 RUN aqt install-qt all_os wasm ${QT_VERSION} wasm_singlethread \
       -O /opt/qt -m qtmultimedia qtshadertools --autodesktop
 
+# aqt does not preserve executable bits on every file; restore them for
+# the tools both kits need (qt-cmake, moc/rcc/uic, qmlimportscanner).
+RUN chmod -R a+rx /opt/qt/${QT_VERSION}/*/bin /opt/qt/${QT_VERSION}/*/libexec
+
 ENV QT_VERSION=${QT_VERSION}
 ENV QT_WASM=/opt/qt/${QT_VERSION}/wasm_singlethread
 ENV QT_HOST=/opt/qt/${QT_VERSION}/gcc_64
